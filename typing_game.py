@@ -2,20 +2,32 @@ import time
 import random
 import textwrap
 
-sentences = [
-    "The quick brown fox jumps over the lazy dog while wearing sunglasses.",
-    "Pizza is the answer to all of life's problems, especially on a Monday morning.",
-    "Cats secretly rule the world from their cardboard box headquarters.",
-    "I tried to catch some fog earlier, but I mist completely!",
-    "Coffee is just bean soup that makes you vibrate with productivity.",
-    "My keyboard is fluent in typos and autocorrect disasters.",
-    "Why do programmers prefer dark mode? Because light attracts bugs!",
-    "Dancing penguins make the best debugging partners, obviously.",
-    "The wifi password is always hidden in the most obvious place.",
-    "Unicorns use Python because it's the most magical programming language.",
-    "Time flies like an arrow, but fruit flies like a banana smoothie.",
-    "My computer has a sense of humor - it laughs at my code errors."
-]
+sentences = {
+    "easy": [
+        "The cat sat on the mat and took a nap.",
+        "I love pizza and ice cream on sunny days.",
+        "Dogs are fun pets to have at home.",
+        "Books help us learn new things every day.",
+        "Music makes me happy when I feel sad.",
+        "The sun is bright and warm today."
+    ],
+    "medium": [
+        "The quick brown fox jumps over the lazy dog while wearing sunglasses.",
+        "Pizza is the answer to all of life's problems, especially on Monday morning.",
+        "Cats secretly rule the world from their cardboard box headquarters.",
+        "I tried to catch some fog earlier, but I mist completely!",
+        "Coffee is just bean soup that makes you vibrate with productivity.",
+        "My keyboard is fluent in typos and autocorrect disasters."
+    ],
+    "hard": [
+        "Why do programmers prefer dark mode? Because light attracts bugs & debugging sessions!",
+        "The wifi password is 'P@ssw0rd123!' - hidden in the most obvious place, naturally.",
+        "Unicorns use Python because it's the most magical programming language (definitely not C++).",
+        "Time flies like an arrow; fruit flies like a banana smoothie at 3:14 AM.",
+        "My computer has a sense of humor - it laughs at my code errors & syntax mistakes.",
+        "Dancing penguins make the best debugging partners, obviously (trust me on this one)."
+    ]
+}
 
 def start_game():
     print("\nWelcome to the Typing Speed Game!")
