@@ -3,11 +3,18 @@ import random
 import textwrap
 
 sentences = [
-    "The quick brown fox jumps over the lazy dog.",
-    "Python is an easy to learn, powerful programming language.",
-    "Practice makes perfect.",
-    "Typing speed is a useful skill.",
-    "Stay focused and keep improving."
+    "The quick brown fox jumps over the lazy dog while wearing sunglasses.",
+    "Pizza is the answer to all of life's problems, especially on a Monday morning.",
+    "Cats secretly rule the world from their cardboard box headquarters.",
+    "I tried to catch some fog earlier, but I mist completely!",
+    "Coffee is just bean soup that makes you vibrate with productivity.",
+    "My keyboard is fluent in typos and autocorrect disasters.",
+    "Why do programmers prefer dark mode? Because light attracts bugs!",
+    "Dancing penguins make the best debugging partners, obviously.",
+    "The wifi password is always hidden in the most obvious place.",
+    "Unicorns use Python because it's the most magical programming language.",
+    "Time flies like an arrow, but fruit flies like a banana smoothie.",
+    "My computer has a sense of humor - it laughs at my code errors."
 ]
 
 def start_game():
