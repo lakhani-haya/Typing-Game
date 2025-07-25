@@ -109,25 +109,25 @@ def calculate_performance_feedback(difficulty, wpm, accuracy):
     """Calculate performance feedback based on difficulty level"""
     if difficulty == "Easy":
         if wpm >= 40 and accuracy >= 95:
-            return "🌟 Excellent! Ready for medium difficulty?"
+            return "Excellent! Ready for medium difficulty?"
         elif wpm >= 25 and accuracy >= 90:
-            return "👍 Good job! Keep practicing!"
+            return "Good job! Keep practicing!"
         else:
-            return "💪 Keep practicing to improve your speed and accuracy!"
+            return "Keep practicing to improve your speed and accuracy!"
     elif difficulty == "Medium":
         if wpm >= 35 and accuracy >= 92:
-            return "🔥 Outstanding! Try hard difficulty for a challenge!"
+            return "Outstanding! Try hard difficulty for a challenge!"
         elif wpm >= 22 and accuracy >= 87:
-            return "✨ Well done! You're getting better!"
+            return "Well done! You're getting better!"
         else:
-            return "📈 Good effort! Practice makes perfect!"
+            return "Good effort! Practice makes perfect!"
     else:  # Hard
         if wpm >= 30 and accuracy >= 90:
-            return "🏆 Master level! You're a typing champion!"
+            return "Master level! You're a typing champion!"
         elif wpm >= 20 and accuracy >= 85:
-            return "⭐ Impressive! You're handling the complexity well!"
+            return "Impressive! You're handling the complexity well!"
         else:
-            return "🎯 Challenging level! Keep pushing your limits!"
+            return "Challenging level! Keep pushing your limits!"
 
 def main():
     # Header
