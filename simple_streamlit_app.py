@@ -4,53 +4,53 @@ import random
 
 # Page configuration
 st.set_page_config(
-    page_title="⚡ TypeRacer Pro",
-    page_icon="⚡",
+    page_title="TypeRacer Pro",
+    page_icon="⌨️",
     layout="centered"
 )
 
-# Simple but cool CSS
+# Professional dark theme CSS
 st.markdown("""
 <style>
     .stApp {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     }
     
     .main-header {
         text-align: center;
-        color: #ffffff;
+        color: #ecf0f1;
         font-size: 3rem;
-        font-weight: 800;
+        font-weight: 700;
         margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
     
     .subtitle {
         text-align: center;
-        color: #b8d4f0;
+        color: #bdc3c7;
         font-size: 1.2rem;
         margin-bottom: 2rem;
     }
     
     .game-card {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(236, 240, 241, 0.05);
         border-radius: 15px;
         padding: 2rem;
         margin: 1rem 0;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(189, 195, 199, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
     
     .sentence-box {
-        background: rgba(0, 0, 0, 0.7);
-        color: #ffffff;
+        background: rgba(44, 62, 80, 0.9);
+        color: #ecf0f1;
         padding: 1.5rem;
         border-radius: 10px;
         font-size: 1.2rem;
         font-family: 'Courier New', monospace;
         text-align: center;
         margin: 1rem 0;
-        border: 2px solid #4ecdc4;
+        border: 2px solid #3498db;
     }
     
     .difficulty-badge {
@@ -62,12 +62,12 @@ st.markdown("""
         color: white;
     }
     
-    .easy { background: #4CAF50; }
-    .medium { background: #FF9800; }
-    .hard { background: #F44336; }
+    .easy { background: #27ae60; }
+    .medium { background: #f39c12; }
+    .hard { background: #e74c3c; }
     
     .metric-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
         padding: 1rem;
         border-radius: 10px;
         text-align: center;
