@@ -29,11 +29,31 @@ sentences = {
     ]
 }
 
+def choose_difficulty():
+    print("\n🎯 Choose your difficulty level:")
+    print("1. Easy - Simple words and short sentences")
+    print("2. Medium - Moderate complexity with punctuation")
+    print("3. Hard - Complex sentences with special characters")
+    
+    while True:
+        choice = input("\nEnter your choice (1/2/3): ").strip()
+        if choice == "1":
+            return "easy"
+        elif choice == "2":
+            return "medium"
+        elif choice == "3":
+            return "hard"
+        else:
+            print("Invalid choice! Please enter 1, 2, or 3.")
+
 def start_game():
     print("\nWelcome to the Typing Speed Game!")
     input("Press Enter to begin...")
 
-    sentence = random.choice(sentences)
+    difficulty = choose_difficulty()
+    sentence = random.choice(sentences[difficulty])
+    
+    print(f"\n🎮 Difficulty: {difficulty.upper()}")
     print("\nType the following:\n")
     print(textwrap.fill(sentence, width=60))
     print()
