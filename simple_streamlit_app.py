@@ -9,48 +9,49 @@ st.set_page_config(
     layout="centered"
 )
 
-# Professional dark theme CSS
+# Professional light theme CSS
 st.markdown("""
 <style>
     .stApp {
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     }
     
     .main-header {
         text-align: center;
-        color: #ecf0f1;
+        color: #343a40;
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
     
     .subtitle {
         text-align: center;
-        color: #bdc3c7;
+        color: #6c757d;
         font-size: 1.2rem;
         margin-bottom: 2rem;
     }
     
     .game-card {
-        background: rgba(236, 240, 241, 0.05);
+        background: rgba(255, 255, 255, 0.8);
         border-radius: 15px;
         padding: 2rem;
         margin: 1rem 0;
-        border: 1px solid rgba(189, 195, 199, 0.2);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
     
     .sentence-box {
-        background: rgba(44, 62, 80, 0.9);
-        color: #ecf0f1;
+        background: #ffffff;
+        color: #212529;
         padding: 1.5rem;
         border-radius: 10px;
         font-size: 1.2rem;
         font-family: 'Courier New', monospace;
         text-align: center;
         margin: 1rem 0;
-        border: 2px solid #3498db;
+        border: 2px solid #007bff;
+        box-shadow: 0 2px 10px rgba(0, 123, 255, 0.1);
     }
     
     .difficulty-badge {
@@ -62,17 +63,25 @@ st.markdown("""
         color: white;
     }
     
-    .easy { background: #27ae60; }
-    .medium { background: #f39c12; }
-    .hard { background: #e74c3c; }
+    .easy { background: #28a745; }
+    .medium { background: #ffc107; color: #212529; }
+    .hard { background: #dc3545; }
     
     .metric-box {
-        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
         padding: 1rem;
         border-radius: 10px;
         text-align: center;
         color: white;
         margin: 0.5rem;
+    }
+    
+    .typing-input {
+        background: #ffffff !important;
+        border: 2px solid #007bff !important;
+        border-radius: 8px !important;
+        font-family: 'Courier New', monospace !important;
+        font-size: 1.1rem !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -202,11 +211,10 @@ def main():
         ''', unsafe_allow_html=True)
         
         # Text input
-        typed_text = st.text_area(
-            "Start typing here:",
-            placeholder="Click here and start typing! Timer starts automatically...",
-            height=100,
-            label_visibility="collapsed"
+        typed_text = st.text_input(
+            "Type here (press Enter to submit):",
+            placeholder="Click here and start typing! Press Enter when done...",
+            key="typing_input"
         )
         
         # Start timing
