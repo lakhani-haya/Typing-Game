@@ -131,8 +131,8 @@ def calculate_performance_feedback(difficulty, wpm, accuracy):
 
 def main():
     # Header
-    st.markdown('<h1 class="main-header">⚡ TypeRacer Pro ⚡</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="subtitle">🚀 Test your typing speed with style! 🚀</p>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">TypeRacer Pro</h1>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">Test your typing speed with precision</p>', unsafe_allow_html=True)
     
     # Initialize session state
     if 'game_active' not in st.session_state:
@@ -146,13 +146,12 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.markdown("### 🎮 Game Settings")
+        st.markdown("### Game Settings")
         
         # Difficulty selection
         difficulty = st.selectbox(
-            "🎯 Choose Difficulty:",
-            ["Easy", "Medium", "Hard"],
-            format_func=lambda x: f"{'🟢' if x == 'Easy' else '🟡' if x == 'Medium' else '🔴'} {x}"
+            "Choose Difficulty:",
+            ["Easy", "Medium", "Hard"]
         )
         
         # Display difficulty info
@@ -164,12 +163,12 @@ def main():
         st.info(difficulty_info[difficulty])
         
         # Start game button
-        start_clicked = st.button("🚀 Start New Game", type="primary", use_container_width=True)
+        start_clicked = st.button("Start New Game", type="primary", use_container_width=True)
         
         # Show stats if available
         if st.session_state.results:
             avg_wpm = sum(r['wpm'] for r in st.session_state.results) / len(st.session_state.results)
-            st.markdown("### 📊 Your Stats")
+            st.markdown("### Your Stats")
             st.metric("Games Played", len(st.session_state.results))
             st.metric("Average WPM", round(avg_wpm, 1))
     
@@ -189,7 +188,7 @@ def main():
         st.markdown(f'''
             <div style="text-align: center; margin-bottom: 1rem;">
                 <span class="difficulty-badge {badge_class}">
-                    🎮 {st.session_state.difficulty.upper()} MODE
+                    {st.session_state.difficulty.upper()} MODE
                 </span>
             </div>
         ''', unsafe_allow_html=True)
@@ -197,7 +196,7 @@ def main():
         # Display sentence
         st.markdown(f'''
             <div class="sentence-box">
-                📝 TYPE THIS SENTENCE:<br><br>
+                TYPE THIS SENTENCE:<br><br>
                 {st.session_state.sentence}
             </div>
         ''', unsafe_allow_html=True)
@@ -205,7 +204,7 @@ def main():
         # Text input
         typed_text = st.text_area(
             "Start typing here:",
-            placeholder="🎯 Click here and start typing! Timer starts automatically...",
+            placeholder="Click here and start typing! Timer starts automatically...",
             height=100,
             label_visibility="collapsed"
         )
