@@ -315,25 +315,25 @@ def main():
     # Simple results history
     if st.session_state.results:
         st.markdown("---")
-        st.markdown("## 📊 Recent Games")
+        st.markdown("## Recent Games")
         
         # Show last 3 games only to keep it light
         recent_games = st.session_state.results[-3:]
         
         for i, result in enumerate(reversed(recent_games)):
-            with st.expander(f"🎮 Game {len(st.session_state.results) - i} - {result['difficulty']} - {result['wpm']} WPM"):
-                st.write(f"**📝 Sentence:** _{result['sentence']}_")
+            with st.expander(f"Game {len(st.session_state.results) - i} - {result['difficulty']} - {result['wpm']} WPM"):
+                st.write(f"**Sentence:** _{result['sentence']}_")
                 
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.metric("⏱️ Time", f"{result['time']}s")
+                    st.metric("Time", f"{result['time']}s")
                 with col2:
-                    st.metric("💨 WPM", result['wpm'])
+                    st.metric("WPM", result['wpm'])
                 with col3:
-                    st.metric("🎯 Accuracy", f"{result['accuracy']}%")
+                    st.metric("Accuracy", f"{result['accuracy']}%")
         
         # Clear history button
-        if st.button("🗑️ Clear History", use_container_width=True):
+        if st.button("Clear History", use_container_width=True):
             st.session_state.results = []
             st.rerun()
 
