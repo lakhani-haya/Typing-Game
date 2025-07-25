@@ -230,35 +230,35 @@ def main():
                 
                 # Celebration
                 st.balloons()
-                st.success("🎉 Perfect! You nailed it! 🎉")
+                st.success("Perfect! You nailed it!")
                 
                 # Display results
                 col1, col2, col3 = st.columns(3)
                 with col1:
                     st.markdown(f'''
                         <div class="metric-box">
-                            <h3>⏱️ Time</h3>
+                            <h3>Time</h3>
                             <h2>{round(time_taken, 2)}s</h2>
                         </div>
                     ''', unsafe_allow_html=True)
                 with col2:
                     st.markdown(f'''
                         <div class="metric-box">
-                            <h3>💨 WPM</h3>
+                            <h3>WPM</h3>
                             <h2>{wpm}</h2>
                         </div>
                     ''', unsafe_allow_html=True)
                 with col3:
                     st.markdown(f'''
                         <div class="metric-box">
-                            <h3>🎯 Accuracy</h3>
+                            <h3>Accuracy</h3>
                             <h2>{accuracy}%</h2>
                         </div>
                     ''', unsafe_allow_html=True)
                 
                 # Feedback
                 feedback = calculate_performance_feedback(st.session_state.difficulty, wpm, accuracy)
-                st.info(f"💬 {feedback}")
+                st.info(feedback)
                 
                 # Save results
                 result = {
