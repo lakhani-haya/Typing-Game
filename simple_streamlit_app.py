@@ -298,25 +298,25 @@ def main():
         # Welcome screen
         st.markdown("""
             <div class="game-card" style="text-align: center;">
-                <h2 style="color: white; margin-bottom: 2rem;">Ready to Test Your Skills?</h2>
+                <h2 style="color: #343a40; margin-bottom: 2rem;">Ready to Test Your Skills?</h2>
                 <div style="display: flex; justify-content: space-around; margin: 2rem 0;">
                     <div style="text-align: center;">
-                        <div style="font-size: 2rem; color: #27ae60;">●</div>
-                        <h4 style="color: #27ae60;">Easy</h4>
-                        <p style="color: #ccc;">Perfect for beginners</p>
+                        <div style="font-size: 2rem; color: #28a745;">●</div>
+                        <h4 style="color: #28a745;">Easy</h4>
+                        <p style="color: #6c757d;">Perfect for beginners</p>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: 2rem; color: #f39c12;">●</div>
-                        <h4 style="color: #f39c12;">Medium</h4>
-                        <p style="color: #ccc;">Step up the challenge</p>
+                        <div style="font-size: 2rem; color: #ffc107;">●</div>
+                        <h4 style="color: #ffc107;">Medium</h4>
+                        <p style="color: #6c757d;">Step up the challenge</p>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: 2rem; color: #e74c3c;">●</div>
-                        <h4 style="color: #e74c3c;">Hard</h4>
-                        <p style="color: #ccc;">For typing masters</p>
+                        <div style="font-size: 2rem; color: #dc3545;">●</div>
+                        <h4 style="color: #dc3545;">Hard</h4>
+                        <p style="color: #6c757d;">For typing masters</p>
                     </div>
                 </div>
-                <p style="color: #ccc;">Choose your difficulty and click "Start New Game"!</p>
+                <p style="color: #6c757d;">Choose your difficulty and click "Start New Game"!</p>
             </div>
         """, unsafe_allow_html=True)
     
