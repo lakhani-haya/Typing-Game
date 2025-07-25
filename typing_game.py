@@ -73,6 +73,29 @@ def start_game():
     print(f"\n⏱️ Time Taken: {round(time_taken, 2)} seconds")
     print(f"💨 Words per Minute (WPM): {wpm}")
     print(f"🎯 Accuracy: {accuracy}%")
+    
+    # Performance feedback based on difficulty
+    if difficulty == "easy":
+        if wpm >= 40 and accuracy >= 95:
+            print("🌟 Excellent! Ready for medium difficulty?")
+        elif wpm >= 25 and accuracy >= 90:
+            print("👍 Good job! Keep practicing!")
+        else:
+            print("💪 Keep practicing to improve your speed and accuracy!")
+    elif difficulty == "medium":
+        if wpm >= 35 and accuracy >= 92:
+            print("🔥 Outstanding! Try hard difficulty for a challenge!")
+        elif wpm >= 22 and accuracy >= 87:
+            print("✨ Well done! You're getting better!")
+        else:
+            print("📈 Good effort! Practice makes perfect!")
+    else:  # hard
+        if wpm >= 30 and accuracy >= 90:
+            print("🏆 Master level! You're a typing champion!")
+        elif wpm >= 20 and accuracy >= 85:
+            print("⭐ Impressive! You're handling the complexity well!")
+        else:
+            print("🎯 Challenging level! Keep pushing your limits!")
 
     if input("\nPlay again? (y/n): ").lower() == 'y':
         start_game()
