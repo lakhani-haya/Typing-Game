@@ -278,11 +278,11 @@ def main():
                 
                 col1, col2 = st.columns(2)
                 with col1:
-                    st.metric("⚡ Live Accuracy", f"{current_accuracy}%")
+                    st.metric("Live Accuracy", f"{current_accuracy}%")
                 with col2:
                     if st.session_state.start_time:
                         elapsed = time.time() - st.session_state.start_time
-                        st.metric("⏱️ Time", f"{round(elapsed, 1)}s")
+                        st.metric("Time", f"{round(elapsed, 1)}s")
         
         st.markdown('</div>', unsafe_allow_html=True)
     
