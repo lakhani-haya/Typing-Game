@@ -1,7 +1,8 @@
 # ⌨️ Typing Speed Game
 
-A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your typing speed and accuracy with animated feedback and adjustable difficulty levels.
+A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your typing speed and accuracy with animated feedback and adjustable difficulty levels — all from the comfort of your browser.
 
+![Demo](path/to/demo.gif) <!-- Optional: add a demo GIF or screenshot -->
 
 ## 🚀 Features
 
@@ -13,12 +14,14 @@ A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your 
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Tech Stack
 
-- **Python 3**
-- **Streamlit**
-- **random**, **time**, **textwrap** 
-
+| Category         | Tools & Libraries               |
+|------------------|----------------------------------|
+| Frontend         | Streamlit UI Components, Lottie Animations  |
+| Backend          | Python 3, Streamlit              |
+| Logic/Utilities  | `random`, `time`, `textwrap`     |
+| Animation Support  | `streamlit-lottie`          |
 
 ---
 
@@ -28,4 +31,5 @@ A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your 
    ```bash
    git clone https://github.com/yourusername/typing-speed-game.git
    cd typing-speed-game
+
 
