@@ -1,8 +1,7 @@
 # ⌨️ Typing Speed Game
 
-A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your typing speed and accuracy with animated feedback and adjustable difficulty levels — all from the comfort of your browser.
+A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your typing speed and accuracy with animated feedback and adjustable difficulty levels.
 
-![Demo](path/to/demo.gif) <!-- Optional: add a demo GIF or screenshot -->
 
 ## 🚀 Features
 
