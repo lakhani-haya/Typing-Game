@@ -152,6 +152,10 @@ def main():
         st.session_state.start_time = None
     if 'results' not in st.session_state:
         st.session_state.results = []
+    if 'game_completed' not in st.session_state:
+        st.session_state.game_completed = False
+    if 'final_time' not in st.session_state:
+        st.session_state.final_time = 0
     
     # Sidebar
     with st.sidebar:
