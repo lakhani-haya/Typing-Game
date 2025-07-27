@@ -195,6 +195,7 @@ def main():
         st.session_state.difficulty = difficulty
         st.session_state.game_completed = False
         st.session_state.final_time = 0
+        st.session_state.typing_started = False
         st.rerun()
     
     if st.session_state.game_active:
