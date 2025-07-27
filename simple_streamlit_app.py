@@ -68,12 +68,13 @@ st.markdown("""
     .hard { background: #dc3545; }
     
     .metric-box {
-        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        background: linear-gradient(135deg, #a8d8ea 0%, #7fb3d3 100%);
         padding: 1rem;
         border-radius: 10px;
         text-align: center;
-        color: white;
+        color: #2c3e50;
         margin: 0.5rem;
+        box-shadow: 0 2px 8px rgba(168, 216, 234, 0.3);
     }
     
     .typing-input {
