@@ -203,7 +203,6 @@ def main():
         st.rerun()
     
     if st.session_state.game_active:
-        st.markdown('<div class="game-card">', unsafe_allow_html=True)
         
         # Difficulty badge
         badge_class = st.session_state.difficulty.lower()
