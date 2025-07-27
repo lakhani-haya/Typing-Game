@@ -308,10 +308,9 @@ def main():
                 st.session_state.timer_active = True
                 st.session_state.current_input = typed_text
                 st.success("⏱️ Timer started!")
-                st.rerun()
             
             # Update current input
-            if typed_text != st.session_state.current_input:
+            elif typed_text != st.session_state.current_input:
                 st.session_state.current_input = typed_text
             
             # Real-time feedback
