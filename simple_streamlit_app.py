@@ -302,6 +302,7 @@ def main():
                 # First time user types - start the timer
                 st.session_state.start_time = time.time()
                 st.session_state.typing_started = True
+                st.success("Timer started! ⏱️")
             
             # Real-time feedback
             if typed_text:
@@ -313,9 +314,14 @@ def main():
                     if st.session_state.start_time and not st.session_state.game_completed:
                         end_time = time.time()
                         time_taken = end_time - st.session_state.start_time
-                        st.session_state.final_time = time_taken
-                        st.session_state.game_completed = True
-                        st.rerun()
+                        
+                        # Ensure we have a valid time
+                        if time_taken > 0:
+                            st.session_state.final_time = time_taken
+                            st.session_state.game_completed = True
+                            st.rerun()
+                        else:
+                            st.error("Timing error - please try again!")
                 
                 else:
                     # Live feedback
@@ -326,13 +332,17 @@ def main():
                     with col1:
                         st.metric("Live Accuracy", f"{current_accuracy}%")
                     with col2:
-                        if st.session_state.start_time:
+                        if st.session_state.start_time and st.session_state.typing_started:
                             elapsed = time.time() - st.session_state.start_time
                             st.metric("Elapsed Time", f"{round(elapsed, 1)}s")
+                        else:
+                            st.metric("Elapsed Time", "0.0s")
                             
             # Show instructions if user hasn't started typing
             if not typed_text:
                 st.info("💡 Start typing to begin the timer!")
+            elif not st.session_state.typing_started:
+                st.warning("🔄 Initializing timer...")
         
         st.markdown('</div>', unsafe_allow_html=True)
     
