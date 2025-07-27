@@ -337,7 +337,7 @@ def main():
                     with col1:
                         st.metric("Live Accuracy", f"{current_accuracy}%")
                     with col2:
-                        if st.session_state.timer_active and st.session_state.start_time:
+                        if st.session_state.timer_active and st.session_state.start_time > 0:
                             elapsed = time.time() - st.session_state.start_time
                             st.metric("Elapsed Time", f"{round(elapsed, 1)}s")
                         else:
