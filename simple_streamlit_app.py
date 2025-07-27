@@ -275,6 +275,11 @@ def main():
             if st.button("Start New Game", type="primary"):
                 st.session_state.game_active = False
                 st.session_state.game_completed = False
+                st.session_state.typing_started = False
+                # Clean up the just_added flag
+                for result in st.session_state.results:
+                    if 'just_added' in result:
+                        del result['just_added']
                 st.rerun()
         
         else:
@@ -285,19 +290,21 @@ def main():
                 key="typing_input"
             )
             
-            # Start timing when user begins typing
-            if typed_text and st.session_state.start_time is None:
+            # Handle timing logic more carefully
+            if typed_text and not st.session_state.typing_started:
+                # First time user types - start the timer
                 st.session_state.start_time = time.time()
+                st.session_state.typing_started = True
             
             # Real-time feedback
             if typed_text:
                 progress = min(len(typed_text) / len(st.session_state.sentence), 1.0)
                 st.progress(progress, text=f"Progress: {int(progress * 100)}%")
                 
-                # Check completion
-                if typed_text.strip() == st.session_state.sentence:
-                    end_time = time.time()
-                    if st.session_state.start_time:
+                # Check completion - exact match required
+                if typed_text == st.session_state.sentence:
+                    if st.session_state.start_time and not st.session_state.game_completed:
+                        end_time = time.time()
                         time_taken = end_time - st.session_state.start_time
                         st.session_state.final_time = time_taken
                         st.session_state.game_completed = True
@@ -314,7 +321,11 @@ def main():
                     with col2:
                         if st.session_state.start_time:
                             elapsed = time.time() - st.session_state.start_time
-                            st.metric("Time", f"{round(elapsed, 1)}s")
+                            st.metric("Elapsed Time", f"{round(elapsed, 1)}s")
+                            
+            # Show instructions if user hasn't started typing
+            if not typed_text:
+                st.info("💡 Start typing to begin the timer!")
         
         st.markdown('</div>', unsafe_allow_html=True)
     
