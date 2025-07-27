@@ -294,24 +294,26 @@ def main():
                 st.rerun()
         
         else:
-            # Text input for active game
+            # Text input for active game with callback
+            def on_text_change():
+                current_input = st.session_state.typing_input
+                # Start timer on first keystroke
+                if current_input and not st.session_state.timer_active:
+                    st.session_state.start_time = time.time()
+                    st.session_state.timer_active = True
+                st.session_state.current_input = current_input
+            
             typed_text = st.text_input(
                 "Type here (press Enter to submit):",
                 placeholder="Click here and start typing! Press Enter when done...",
                 key="typing_input",
-                value=st.session_state.current_input
+                value=st.session_state.current_input,
+                on_change=on_text_change
             )
             
-            # Detect when user starts typing for the first time
-            if typed_text and not st.session_state.timer_active:
-                st.session_state.start_time = time.time()
-                st.session_state.timer_active = True
-                st.session_state.current_input = typed_text
-                st.success("⏱️ Timer started!")
-            
-            # Update current input
-            elif typed_text != st.session_state.current_input:
-                st.session_state.current_input = typed_text
+            # Show timer started message
+            if st.session_state.timer_active and typed_text:
+                st.success("⏱️ Timer is running!")
             
             # Real-time feedback
             if typed_text:
@@ -325,7 +327,6 @@ def main():
                     st.session_state.final_time = time_taken
                     st.session_state.game_completed = True
                     st.session_state.timer_active = False
-                    st.rerun()
                 
                 else:
                     # Live feedback
@@ -338,7 +339,11 @@ def main():
                     with col2:
                         if st.session_state.timer_active and st.session_state.start_time > 0:
                             elapsed = time.time() - st.session_state.start_time
-                            st.metric("Elapsed Time", f"{round(elapsed, 1)}s")
+                            # Only show elapsed time if it's meaningful (more than 0.05 seconds)
+                            if elapsed >= 0.05:
+                                st.metric("Elapsed Time", f"{round(elapsed, 1)}s")
+                            else:
+                                st.metric("Elapsed Time", "0.0s")
                         else:
                             st.metric("Elapsed Time", "0.0s")
                             
