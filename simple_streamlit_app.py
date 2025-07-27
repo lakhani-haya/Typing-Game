@@ -339,11 +339,7 @@ def main():
                     with col2:
                         if st.session_state.timer_active and st.session_state.start_time > 0:
                             elapsed = time.time() - st.session_state.start_time
-                            # Only show elapsed time if it's meaningful (more than 0.05 seconds)
-                            if elapsed >= 0.05:
-                                st.metric("Elapsed Time", f"{round(elapsed, 1)}s")
-                            else:
-                                st.metric("Elapsed Time", "0.0s")
+                            st.metric("Elapsed Time", f"{round(elapsed, 1)}s")
                         else:
                             st.metric("Elapsed Time", "0.0s")
                             
