@@ -194,10 +194,10 @@ def main():
     if start_clicked:
         st.session_state.sentence = random.choice(sentences[difficulty])
         st.session_state.game_active = True
-        st.session_state.start_time = None
+        st.session_state.start_time = 0.0
         st.session_state.difficulty = difficulty
         st.session_state.game_completed = False
-        st.session_state.final_time = 0
+        st.session_state.final_time = 0.0
         st.session_state.current_input = ""
         st.session_state.timer_active = False
         st.rerun()
