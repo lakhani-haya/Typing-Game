@@ -150,13 +150,13 @@ def main():
     if 'sentence' not in st.session_state:
         st.session_state.sentence = ""
     if 'start_time' not in st.session_state:
-        st.session_state.start_time = None
+        st.session_state.start_time = 0.0
     if 'results' not in st.session_state:
         st.session_state.results = []
     if 'game_completed' not in st.session_state:
         st.session_state.game_completed = False
     if 'final_time' not in st.session_state:
-        st.session_state.final_time = 0
+        st.session_state.final_time = 0.0
     if 'current_input' not in st.session_state:
         st.session_state.current_input = ""
     if 'timer_active' not in st.session_state:
