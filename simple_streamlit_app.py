@@ -156,6 +156,8 @@ def main():
         st.session_state.game_completed = False
     if 'final_time' not in st.session_state:
         st.session_state.final_time = 0
+    if 'typing_started' not in st.session_state:
+        st.session_state.typing_started = False
     
     # Sidebar
     with st.sidebar:
