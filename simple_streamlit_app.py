@@ -285,7 +285,8 @@ def main():
             if st.button("Start New Game", type="primary"):
                 st.session_state.game_active = False
                 st.session_state.game_completed = False
-                st.session_state.typing_started = False
+                st.session_state.current_input = ""
+                st.session_state.timer_active = False
                 # Clean up the just_added flag
                 for result in st.session_state.results:
                     if 'just_added' in result:
@@ -297,34 +298,35 @@ def main():
             typed_text = st.text_input(
                 "Type here (press Enter to submit):",
                 placeholder="Click here and start typing! Press Enter when done...",
-                key="typing_input"
+                key="typing_input",
+                value=st.session_state.current_input
             )
             
-            # Handle timing logic more carefully
-            if typed_text and not st.session_state.typing_started:
-                # First time user types - start the timer
+            # Detect when user starts typing for the first time
+            if typed_text and not st.session_state.timer_active:
                 st.session_state.start_time = time.time()
-                st.session_state.typing_started = True
-                st.success("Timer started! ⏱️")
+                st.session_state.timer_active = True
+                st.session_state.current_input = typed_text
+                st.success("⏱️ Timer started!")
+                st.rerun()
+            
+            # Update current input
+            if typed_text != st.session_state.current_input:
+                st.session_state.current_input = typed_text
             
             # Real-time feedback
             if typed_text:
                 progress = min(len(typed_text) / len(st.session_state.sentence), 1.0)
                 st.progress(progress, text=f"Progress: {int(progress * 100)}%")
                 
-                # Check completion - exact match required
-                if typed_text == st.session_state.sentence:
-                    if st.session_state.start_time and not st.session_state.game_completed:
-                        end_time = time.time()
-                        time_taken = end_time - st.session_state.start_time
-                        
-                        # Ensure we have a valid time
-                        if time_taken > 0:
-                            st.session_state.final_time = time_taken
-                            st.session_state.game_completed = True
-                            st.rerun()
-                        else:
-                            st.error("Timing error - please try again!")
+                # Check for exact completion
+                if typed_text == st.session_state.sentence and st.session_state.timer_active:
+                    end_time = time.time()
+                    time_taken = end_time - st.session_state.start_time
+                    st.session_state.final_time = time_taken
+                    st.session_state.game_completed = True
+                    st.session_state.timer_active = False
+                    st.rerun()
                 
                 else:
                     # Live feedback
@@ -335,17 +337,15 @@ def main():
                     with col1:
                         st.metric("Live Accuracy", f"{current_accuracy}%")
                     with col2:
-                        if st.session_state.start_time and st.session_state.typing_started:
+                        if st.session_state.timer_active and st.session_state.start_time:
                             elapsed = time.time() - st.session_state.start_time
                             st.metric("Elapsed Time", f"{round(elapsed, 1)}s")
                         else:
                             st.metric("Elapsed Time", "0.0s")
                             
             # Show instructions if user hasn't started typing
-            if not typed_text:
+            else:
                 st.info("💡 Start typing to begin the timer!")
-            elif not st.session_state.typing_started:
-                st.warning("🔄 Initializing timer...")
         
         st.markdown('</div>', unsafe_allow_html=True)
     
