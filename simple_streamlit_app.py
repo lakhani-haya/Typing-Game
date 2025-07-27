@@ -224,8 +224,14 @@ def main():
         if st.session_state.game_completed:
             # Show results from completed game
             time_taken = st.session_state.final_time
+            
+            # Debug info - remove this later if needed
+            if time_taken <= 0:
+                st.error("Timer error detected! Please start a new game.")
+                time_taken = 1.0  # Fallback to prevent division by zero
+            
             words = len(st.session_state.sentence.split())
-            wpm = round(words / (time_taken / 60), 2)
+            wpm = round(words / (time_taken / 60), 2) if time_taken > 0 else 0
             accuracy = 100.0
             
             # Celebration
