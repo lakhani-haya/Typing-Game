@@ -191,6 +191,8 @@ def main():
         st.session_state.game_active = True
         st.session_state.start_time = None
         st.session_state.difficulty = difficulty
+        st.session_state.game_completed = False
+        st.session_state.final_time = 0
         st.rerun()
     
     if st.session_state.game_active:
@@ -214,87 +216,102 @@ def main():
             </div>
         ''', unsafe_allow_html=True)
         
-        # Text input
-        typed_text = st.text_input(
-            "Type here (press Enter to submit):",
-            placeholder="Click here and start typing! Press Enter when done...",
-            key="typing_input"
-        )
-        
-        # Start timing
-        if typed_text and st.session_state.start_time is None:
-            st.session_state.start_time = time.time()
-        
-        # Real-time feedback
-        if typed_text:
-            progress = min(len(typed_text) / len(st.session_state.sentence), 1.0)
-            st.progress(progress, text=f"Progress: {int(progress * 100)}%")
+        # Check if game was just completed
+        if st.session_state.game_completed:
+            # Show results from completed game
+            time_taken = st.session_state.final_time
+            words = len(st.session_state.sentence.split())
+            wpm = round(words / (time_taken / 60), 2)
+            accuracy = 100.0
             
-            # Check completion
-            if typed_text.strip() == st.session_state.sentence:
-                end_time = time.time()
-                time_taken = end_time - st.session_state.start_time
-                
-                # Calculate metrics
-                words = len(st.session_state.sentence.split())
-                wpm = round(words / (time_taken / 60), 2)
-                accuracy = 100.0
-                
-                # Celebration
-                st.balloons()
-                st.success("Perfect! You nailed it!")
-                
-                # Display results
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.markdown(f'''
-                        <div class="metric-box">
-                            <h3>Time</h3>
-                            <h2>{round(time_taken, 2)}s</h2>
-                        </div>
-                    ''', unsafe_allow_html=True)
-                with col2:
-                    st.markdown(f'''
-                        <div class="metric-box">
-                            <h3>WPM</h3>
-                            <h2>{wpm}</h2>
-                        </div>
-                    ''', unsafe_allow_html=True)
-                with col3:
-                    st.markdown(f'''
-                        <div class="metric-box">
-                            <h3>Accuracy</h3>
-                            <h2>{accuracy}%</h2>
-                        </div>
-                    ''', unsafe_allow_html=True)
-                
-                # Feedback
-                feedback = calculate_performance_feedback(st.session_state.difficulty, wpm, accuracy)
-                st.info(feedback)
-                
-                # Save results
+            # Celebration
+            st.balloons()
+            st.success("Perfect! You nailed it!")
+            
+            # Display results
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.markdown(f'''
+                    <div class="metric-box">
+                        <h3>Time</h3>
+                        <h2>{round(time_taken, 2)}s</h2>
+                    </div>
+                ''', unsafe_allow_html=True)
+            with col2:
+                st.markdown(f'''
+                    <div class="metric-box">
+                        <h3>WPM</h3>
+                        <h2>{wpm}</h2>
+                    </div>
+                ''', unsafe_allow_html=True)
+            with col3:
+                st.markdown(f'''
+                    <div class="metric-box">
+                        <h3>Accuracy</h3>
+                        <h2>{accuracy}%</h2>
+                    </div>
+                ''', unsafe_allow_html=True)
+            
+            # Feedback
+            feedback = calculate_performance_feedback(st.session_state.difficulty, wpm, accuracy)
+            st.info(feedback)
+            
+            # Save results only once
+            if not any(r.get('just_added') for r in st.session_state.results):
                 result = {
                     "difficulty": st.session_state.difficulty,
                     "time": round(time_taken, 2),
                     "wpm": wpm,
                     "accuracy": accuracy,
-                    "sentence": st.session_state.sentence
+                    "sentence": st.session_state.sentence,
+                    "just_added": True
                 }
                 st.session_state.results.append(result)
+            
+            # Button to start new game
+            if st.button("Start New Game", type="primary"):
                 st.session_state.game_active = False
+                st.session_state.game_completed = False
+                st.rerun()
+        
+        else:
+            # Text input for active game
+            typed_text = st.text_input(
+                "Type here (press Enter to submit):",
+                placeholder="Click here and start typing! Press Enter when done...",
+                key="typing_input"
+            )
+            
+            # Start timing when user begins typing
+            if typed_text and st.session_state.start_time is None:
+                st.session_state.start_time = time.time()
+            
+            # Real-time feedback
+            if typed_text:
+                progress = min(len(typed_text) / len(st.session_state.sentence), 1.0)
+                st.progress(progress, text=f"Progress: {int(progress * 100)}%")
                 
-            else:
-                # Live feedback
-                correct_chars = sum(1 for a, b in zip(typed_text, st.session_state.sentence) if a == b)
-                current_accuracy = round((correct_chars / len(st.session_state.sentence)) * 100, 2)
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.metric("Live Accuracy", f"{current_accuracy}%")
-                with col2:
+                # Check completion
+                if typed_text.strip() == st.session_state.sentence:
+                    end_time = time.time()
                     if st.session_state.start_time:
-                        elapsed = time.time() - st.session_state.start_time
-                        st.metric("Time", f"{round(elapsed, 1)}s")
+                        time_taken = end_time - st.session_state.start_time
+                        st.session_state.final_time = time_taken
+                        st.session_state.game_completed = True
+                        st.rerun()
+                
+                else:
+                    # Live feedback
+                    correct_chars = sum(1 for a, b in zip(typed_text, st.session_state.sentence) if a == b)
+                    current_accuracy = round((correct_chars / len(st.session_state.sentence)) * 100, 2)
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.metric("Live Accuracy", f"{current_accuracy}%")
+                    with col2:
+                        if st.session_state.start_time:
+                            elapsed = time.time() - st.session_state.start_time
+                            st.metric("Time", f"{round(elapsed, 1)}s")
         
         st.markdown('</div>', unsafe_allow_html=True)
     
