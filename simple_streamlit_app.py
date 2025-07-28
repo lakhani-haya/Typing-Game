@@ -293,26 +293,31 @@ def main():
                 st.rerun()
         
         else:
-            # Text input for active game with callback
-            def on_text_change():
-                current_input = st.session_state.typing_input
-                # Start timer on first keystroke
-                if current_input and not st.session_state.timer_active:
-                    st.session_state.start_time = time.time()
-                    st.session_state.timer_active = True
-                st.session_state.current_input = current_input
-            
+            # Text input for active game
             typed_text = st.text_input(
                 "Type here (press Enter to submit):",
                 placeholder="Click here and start typing! Press Enter when done...",
                 key="typing_input",
-                value=st.session_state.current_input,
-                on_change=on_text_change
+                value=st.session_state.current_input
             )
             
-            # Show timer started message
-            if st.session_state.timer_active and typed_text:
-                st.success("⏱️ Timer is running!")
+            # Check if user started typing and start timer
+            if typed_text and not st.session_state.timer_active:
+                st.session_state.start_time = time.time()
+                st.session_state.timer_active = True
+                st.session_state.current_input = typed_text
+                st.success("⏱️ Timer started!")
+            
+            # Update current input if changed
+            if typed_text != st.session_state.current_input:
+                st.session_state.current_input = typed_text
+            
+            # Debug info (remove later)
+            with st.expander("Debug Info", expanded=False):
+                st.write(f"Timer Active: {st.session_state.timer_active}")
+                st.write(f"Start Time: {st.session_state.start_time}")
+                st.write(f"Current Input: '{st.session_state.current_input}'")
+                st.write(f"Typed Text: '{typed_text}'")
             
             # Real-time feedback
             if typed_text:

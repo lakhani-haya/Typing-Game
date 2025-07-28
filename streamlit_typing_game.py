@@ -203,11 +203,13 @@ def main():
     if 'sentence' not in st.session_state:
         st.session_state.sentence = ""
     if 'start_time' not in st.session_state:
-        st.session_state.start_time = None
+        st.session_state.start_time = 0.0
     if 'results' not in st.session_state:
         st.session_state.results = []
     if 'high_score' not in st.session_state:
         st.session_state.high_score = {'wpm': 0, 'accuracy': 0}
+    if 'timer_active' not in st.session_state:
+        st.session_state.timer_active = False
     
     # Cool sidebar
     with st.sidebar:
