@@ -389,9 +389,11 @@ def main():
                 with col1:
                     st.metric("⚡ Live Accuracy", f"{current_accuracy}%")
                 with col2:
-                    if st.session_state.start_time:
+                    if st.session_state.start_time > 0:
                         elapsed = time.time() - st.session_state.start_time
                         st.metric("⏱️ Elapsed Time", f"{round(elapsed, 1)}s")
+                    else:
+                        st.metric("⏱️ Elapsed Time", "0.0s")
                 
                 # Visual typing feedback
                 display_html = "<div style='font-family: monospace; font-size: 1.1rem; padding: 1rem; background: rgba(0,0,0,0.7); border-radius: 10px; margin: 1rem 0;'>"
