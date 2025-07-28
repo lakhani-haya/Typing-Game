@@ -312,13 +312,6 @@ def main():
             if typed_text != st.session_state.current_input:
                 st.session_state.current_input = typed_text
             
-            # Debug info (remove later)
-            with st.expander("Debug Info", expanded=False):
-                st.write(f"Timer Active: {st.session_state.timer_active}")
-                st.write(f"Start Time: {st.session_state.start_time}")
-                st.write(f"Current Input: '{st.session_state.current_input}'")
-                st.write(f"Typed Text: '{typed_text}'")
-            
             # Real-time feedback
             if typed_text:
                 progress = min(len(typed_text) / len(st.session_state.sentence), 1.0)
