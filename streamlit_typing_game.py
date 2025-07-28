@@ -288,7 +288,7 @@ def main():
         )
         
         # Start timing when user begins typing
-        if typed_text and st.session_state.start_time is None:
+        if typed_text and st.session_state.start_time == 0.0:
             st.session_state.start_time = time.time()
         
         # Real-time feedback with cool progress bar
