@@ -188,24 +188,28 @@ st.markdown("""
     }
     
     @keyframes pulse {
-        animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
         0% { transform: scale(1); }
         50% { transform: scale(1.05); }
         100% { transform: scale(1); }
     }
     
-    .glow {
-        box-shadow: 0 0 20px rgba(78, 205, 196, 0.6);
-        animation: glow 2s ease-in-out infinite alternate;
+    @keyframes glow {
+        0%, 100% { box-shadow: 0 8px 25px rgba(183, 148, 246, 0.2); }
+        50% { box-shadow: 0 12px 35px rgba(183, 148, 246, 0.4); }
     }
     
-    @keyframes glow {
-        from { box-shadow: 0 0 20px rgba(78, 205, 196, 0.6); }
-        to { box-shadow: 0 0 30px rgba(78, 205, 196, 0.8); }
+    .floating {
+        animation: float 3s ease-in-out infinite;
     }
+    
+    .pulse {
+        animation: pulse 2s ease-in-out infinite;
+    }
+    
+    .glow {
+        animation: glow 2s ease-in-out infinite;
+    }
+</style>""", unsafe_allow_html=True)
     
     .stats-container {
         background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
