@@ -165,14 +165,6 @@ st.markdown("""
         animation: float 3s ease-in-out infinite;
     }
 </style>""", unsafe_allow_html=True)
-        background: #ffffff !important;
-        border: 2px solid #007bff !important;
-        border-radius: 8px !important;
-        font-family: 'Courier New', monospace !important;
-        font-size: 1.1rem !important;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 # Enhanced sentences
 sentences = {
