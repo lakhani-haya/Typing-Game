@@ -345,8 +345,6 @@ def main():
             # Show instructions if user hasn't started typing
             else:
                 st.info("💡 Start typing to begin the timer!")
-        
-        st.markdown('</div>', unsafe_allow_html=True)
     
     else:
         # Welcome screen
