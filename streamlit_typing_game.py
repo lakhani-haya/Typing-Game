@@ -210,17 +210,6 @@ st.markdown("""
         animation: glow 2s ease-in-out infinite;
     }
 </style>""", unsafe_allow_html=True)
-    
-    .stats-container {
-        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-</style>
-""", unsafe_allow_html=True)
 
 # Enhanced sentences with more variety
 sentences = {
