@@ -9,75 +9,162 @@ st.set_page_config(
     layout="centered"
 )
 
-# Professional light theme CSS
+# Beautiful pastel theme CSS
 st.markdown("""
 <style>
     .stApp {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background: linear-gradient(135deg, #ffeef2 0%, #f0f4ff 50%, #f0fff4 100%);
     }
     
     .main-header {
         text-align: center;
-        color: #343a40;
+        color: #5a4fcf;
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        text-shadow: 2px 2px 4px rgba(90, 79, 207, 0.1);
+        background: linear-gradient(45deg, #5a4fcf, #ff6b9d, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
     
     .subtitle {
         text-align: center;
-        color: #6c757d;
+        color: #8b7fb8;
         font-size: 1.2rem;
         margin-bottom: 2rem;
-    }
-    
-    .game-card {
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 15px;
-        padding: 2rem;
-        margin: 1rem 0;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-weight: 500;
     }
     
     .sentence-box {
-        background: #ffffff;
-        color: #212529;
-        padding: 1.5rem;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+        color: #2d3748;
+        padding: 2rem;
+        border-radius: 20px;
         font-size: 1.2rem;
         font-family: 'Courier New', monospace;
         text-align: center;
-        margin: 1rem 0;
-        border: 2px solid #007bff;
-        box-shadow: 0 2px 10px rgba(0, 123, 255, 0.1);
+        margin: 1.5rem 0;
+        border: 2px solid #b794f6;
+        box-shadow: 0 8px 25px rgba(183, 148, 246, 0.15);
+        transition: all 0.3s ease;
+    }
+    
+    .sentence-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(183, 148, 246, 0.2);
     }
     
     .difficulty-badge {
         display: inline-block;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
+        padding: 0.7rem 1.5rem;
+        border-radius: 25px;
         font-weight: bold;
         margin: 0.5rem;
         color: white;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     
-    .easy { background: #28a745; }
-    .medium { background: #ffc107; color: #212529; }
-    .hard { background: #dc3545; }
+    .easy { 
+        background: linear-gradient(135deg, #a8e6cf 0%, #7fcdcd 100%);
+        color: #2d5a3d;
+    }
+    .medium { 
+        background: linear-gradient(135deg, #ffd3a5 0%, #fd9853 100%);
+        color: #8b4513;
+    }
+    .hard { 
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        color: #8b2635;
+    }
     
     .metric-box {
-        background: linear-gradient(135deg, #a8d8ea 0%, #7fb3d3 100%);
-        padding: 1rem;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #e0f2ff 0%, #d6efff 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
         text-align: center;
-        color: #2c3e50;
+        color: #2d5a87;
         margin: 0.5rem;
-        box-shadow: 0 2px 8px rgba(168, 216, 234, 0.3);
+        box-shadow: 0 6px 20px rgba(173, 216, 255, 0.25);
+        border: 1px solid rgba(173, 216, 255, 0.3);
+        transition: all 0.3s ease;
     }
     
-    .typing-input {
+    .metric-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(173, 216, 255, 0.35);
+    }
+    
+    .metric-box h3 {
+        color: #4a90e2;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+    }
+    
+    .metric-box h2 {
+        color: #2d5a87;
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    
+    /* Streamlit component styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .stTextInput > div > div > input {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+        border: 2px solid #c3d9ff;
+        border-radius: 12px;
+        font-family: 'Courier New', monospace;
+        font-size: 1.1rem;
+        padding: 1rem;
+        box-shadow: 0 4px 15px rgba(195, 217, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .stTextInput > div > div > input:focus {
+        border-color: #667eea;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        outline: none;
+    }
+    
+    .stProgress > div > div > div {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+    }
+    
+    .stSelectbox > div > div > div {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+        border: 2px solid #c3d9ff;
+        border-radius: 12px;
+    }
+    
+    /* Custom animations */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .floating {
+        animation: float 3s ease-in-out infinite;
+    }
+</style>""", unsafe_allow_html=True)
         background: #ffffff !important;
         border: 2px solid #007bff !important;
         border-radius: 8px !important;
