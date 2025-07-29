@@ -488,24 +488,21 @@ def main():
                 st.rerun()
         
         else:
-            # Text input for active game
+            # Text input for active game - using key to track changes
             typed_text = st.text_input(
                 "Type here (press Enter to submit):",
                 placeholder="Click here and start typing! Press Enter when done...",
-                key="typing_input",
-                value=st.session_state.current_input
+                key="typing_input"
             )
             
-            # Check if user started typing and start timer
+            # Start timer on first character typed
             if typed_text and not st.session_state.timer_active:
                 st.session_state.start_time = time.time()
                 st.session_state.timer_active = True
-                st.session_state.current_input = typed_text
                 st.success("⏱️ Timer started!")
             
-            # Update current input if changed
-            if typed_text != st.session_state.current_input:
-                st.session_state.current_input = typed_text
+            # Store current input for reference
+            st.session_state.current_input = typed_text
             
             # Real-time feedback
             if typed_text:
