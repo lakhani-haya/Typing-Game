@@ -9,24 +9,38 @@ st.set_page_config(
     layout="centered"
 )
 
-# Beautiful pastel theme CSS
+# Beautiful enhanced pastel theme CSS
 st.markdown("""
 <style>
     .stApp {
-        background: linear-gradient(135deg, #ffeef2 0%, #f0f4ff 50%, #f0fff4 100%);
+        background: linear-gradient(135deg, #fce4ec 0%, #e8f5e8 25%, #e3f2fd 50%, #fff3e0 75%, #f3e5f5 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
     
     .main-header {
         text-align: center;
-        color: #5a4fcf;
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(90, 79, 207, 0.1);
-        background: linear-gradient(45deg, #5a4fcf, #ff6b9d, #4ecdc4);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        background: linear-gradient(45deg, #ff6b9d, #4ecdc4, #96ceb4, #ffeaa7, #dda0dd, #87ceeb);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        background-size: 300% 300%;
+        animation: textGradient 8s ease infinite;
+    }
+    
+    @keyframes textGradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     
     .subtitle {
@@ -35,10 +49,11 @@ st.markdown("""
         font-size: 1.2rem;
         margin-bottom: 2rem;
         font-weight: 500;
+        text-shadow: 1px 1px 2px rgba(139, 127, 184, 0.3);
     }
     
     .sentence-box {
-        background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #f8f4ff 50%, #fff8f0 100%);
         color: #2d3748;
         padding: 2rem;
         border-radius: 20px;
@@ -46,61 +61,106 @@ st.markdown("""
         font-family: 'Courier New', monospace;
         text-align: center;
         margin: 1.5rem 0;
-        border: 2px solid #b794f6;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+        position: relative;
         box-shadow: 0 8px 25px rgba(183, 148, 246, 0.15);
         transition: all 0.3s ease;
     }
     
+    .sentence-box::before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        background: linear-gradient(45deg, #ff6b9d, #4ecdc4, #96ceb4, #ffeaa7, #dda0dd);
+        border-radius: 23px;
+        z-index: -1;
+        background-size: 300% 300%;
+        animation: borderGradient 6s ease infinite;
+    }
+    
+    @keyframes borderGradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+    
     .sentence-box:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 35px rgba(183, 148, 246, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(183, 148, 246, 0.25);
     }
     
     .difficulty-badge {
         display: inline-block;
-        padding: 0.7rem 1.5rem;
+        padding: 0.8rem 1.8rem;
         border-radius: 25px;
         font-weight: bold;
-        margin: 0.5rem;
+        margin: 0.8rem;
         color: white;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255,255,255,0.3);
     }
     
     .easy { 
-        background: linear-gradient(135deg, #a8e6cf 0%, #7fcdcd 100%);
+        background: linear-gradient(135deg, #a8e6cf 0%, #7fcdcd 50%, #88d8a3 100%);
         color: #2d5a3d;
+        box-shadow: 0 6px 20px rgba(168, 230, 207, 0.4);
     }
     .medium { 
-        background: linear-gradient(135deg, #ffd3a5 0%, #fd9853 100%);
+        background: linear-gradient(135deg, #ffd3a5 0%, #fd9853 50%, #ffb347 100%);
         color: #8b4513;
+        box-shadow: 0 6px 20px rgba(255, 211, 165, 0.4);
     }
     .hard { 
-        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fbb6ce 100%);
         color: #8b2635;
+        box-shadow: 0 6px 20px rgba(255, 154, 158, 0.4);
     }
     
     .metric-box {
-        background: linear-gradient(135deg, #e0f2ff 0%, #d6efff 100%);
+        background: linear-gradient(135deg, #e0f2ff 0%, #d6efff 50%, #cce7ff 100%);
         padding: 1.5rem;
         border-radius: 15px;
         text-align: center;
         color: #2d5a87;
         margin: 0.5rem;
-        box-shadow: 0 6px 20px rgba(173, 216, 255, 0.25);
-        border: 1px solid rgba(173, 216, 255, 0.3);
+        box-shadow: 0 8px 25px rgba(173, 216, 255, 0.3);
+        border: 2px solid rgba(173, 216, 255, 0.4);
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .metric-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        transition: left 0.5s;
+    }
+    
+    .metric-box:hover::before {
+        left: 100%;
     }
     
     .metric-box:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(173, 216, 255, 0.35);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(173, 216, 255, 0.4);
+        border-color: rgba(102, 126, 234, 0.6);
     }
     
     .metric-box h3 {
         color: #4a90e2;
         margin-bottom: 0.5rem;
         font-size: 1rem;
+        font-weight: 600;
     }
     
     .metric-box h2 {
@@ -110,49 +170,80 @@ st.markdown("""
         font-weight: 700;
     }
     
-    /* Streamlit component styling */
+    /* Enhanced Streamlit component styling */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
         color: white;
         border: none;
-        border-radius: 15px;
-        padding: 0.75rem 2rem;
+        border-radius: 20px;
+        padding: 0.8rem 2.5rem;
         font-weight: 600;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         transition: all 0.3s ease;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 50%, #f093fb 100%);
     }
     
     .stTextInput > div > div > input {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-        border: 2px solid #c3d9ff;
-        border-radius: 12px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 50%, #fff5f8 100%);
+        border: 3px solid transparent;
+        border-radius: 15px;
         font-family: 'Courier New', monospace;
         font-size: 1.1rem;
-        padding: 1rem;
-        box-shadow: 0 4px 15px rgba(195, 217, 255, 0.2);
+        padding: 1.2rem;
+        box-shadow: 0 6px 20px rgba(195, 217, 255, 0.25);
         transition: all 0.3s ease;
+        background-clip: padding-box;
     }
     
     .stTextInput > div > div > input:focus {
-        border-color: #667eea;
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
         outline: none;
+        transform: translateY(-2px);
     }
     
     .stProgress > div > div > div {
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        border-radius: 10px;
+        background: linear-gradient(90deg, #ff6b9d 0%, #4ecdc4 25%, #96ceb4 50%, #ffeaa7 75%, #dda0dd 100%);
+        border-radius: 15px;
+        height: 12px;
+        background-size: 200% 200%;
+        animation: progressGradient 3s ease infinite;
+    }
+    
+    @keyframes progressGradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     
     .stSelectbox > div > div > div {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-        border: 2px solid #c3d9ff;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 50%, #fff0f5 100%);
+        border: 2px solid rgba(183, 148, 246, 0.4);
         border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    .stSelectbox > div > div > div:hover {
+        border-color: rgba(102, 126, 234, 0.6);
+        box-shadow: 0 4px 15px rgba(183, 148, 246, 0.2);
+    }
+    
+    /* Welcome screen enhancements */
+    .welcome-container {
+        background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,255,0.9) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 25px;
+        padding: 3rem;
+        margin: 2rem 0;
+        border: 2px solid rgba(183, 148, 246, 0.3);
+        box-shadow: 0 20px 50px rgba(183, 148, 246, 0.15);
+        text-align: center;
     }
     
     /* Custom animations */
@@ -163,6 +254,31 @@ st.markdown("""
     
     .floating {
         animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    .pulse {
+        animation: pulse 2s ease-in-out infinite;
+    }
+    
+    /* Additional color accents */
+    .stInfo {
+        background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+        border-left: 4px solid #4ecdc4;
+    }
+    
+    .stSuccess {
+        background: linear-gradient(135deg, #e8f5e8 0%, #f0fff4 100%);
+        border-left: 4px solid #96ceb4;
+    }
+    
+    .stError {
+        background: linear-gradient(135deg, #fce4ec 0%, #fff0f5 100%);
+        border-left: 4px solid #ff9a9e;
     }
 </style>""", unsafe_allow_html=True)
 
