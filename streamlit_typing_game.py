@@ -344,28 +344,6 @@ st.markdown("""
         border-radius: 10px;
     }
 </style>""", unsafe_allow_html=True)
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-    
-    @keyframes glow {
-        0%, 100% { box-shadow: 0 8px 25px rgba(183, 148, 246, 0.2); }
-        50% { box-shadow: 0 12px 35px rgba(183, 148, 246, 0.4); }
-    }
-    
-    .floating {
-        animation: float 3s ease-in-out infinite;
-    }
-    
-    .pulse {
-        animation: pulse 2s ease-in-out infinite;
-    }
-    
-    .glow {
-        animation: glow 2s ease-in-out infinite;
-    }
-</style>""", unsafe_allow_html=True)
 
 # Enhanced sentences with more variety
 sentences = {
