@@ -13,25 +13,38 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Beautiful pastel theme CSS
+# Beautiful enhanced pastel theme CSS with more vibrant colors
 st.markdown("""
 <style>
     .stApp {
-        background: linear-gradient(135deg, #ffeef2 0%, #f0f4ff 50%, #f0fff4 100%);
+        background: linear-gradient(135deg, #fce4ec 0%, #e8f5e8 25%, #e3f2fd 50%, #fff3e0 75%, #f3e5f5 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
     
     .main-header {
         text-align: center;
-        color: #5a4fcf;
         font-size: 4rem;
         font-weight: 800;
         margin-bottom: 0;
-        text-shadow: 2px 2px 4px rgba(90, 79, 207, 0.1);
-        background: linear-gradient(45deg, #5a4fcf, #ff6b9d, #4ecdc4, #a8e6cf);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        background: linear-gradient(45deg, #ff6b9d, #4ecdc4, #96ceb4, #ffeaa7, #dda0dd, #87ceeb, #ffa07a);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        animation: float 3s ease-in-out infinite;
+        background-size: 400% 400%;
+        animation: textGradient 8s ease infinite;
+    }
+    
+    @keyframes textGradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     
     .subtitle {
@@ -40,145 +53,248 @@ st.markdown("""
         font-size: 1.5rem;
         margin-top: -10px;
         font-weight: 500;
-        text-shadow: 1px 1px 2px rgba(139, 127, 184, 0.2);
+        text-shadow: 1px 1px 2px rgba(139, 127, 184, 0.3);
     }
     
     .game-container {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 255, 0.9) 100%);
-        backdrop-filter: blur(15px);
-        border-radius: 25px;
-        padding: 2.5rem;
-        margin: 1.5rem 0;
-        border: 2px solid rgba(183, 148, 246, 0.3);
-        box-shadow: 0 15px 40px rgba(183, 148, 246, 0.15);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 255, 0.95) 50%, rgba(255, 248, 250, 0.95) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        padding: 3rem;
+        margin: 2rem 0;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(183, 148, 246, 0.2);
+    }
+    
+    .game-container::before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        background: linear-gradient(45deg, #ff6b9d, #4ecdc4, #96ceb4, #ffeaa7, #dda0dd);
+        border-radius: 33px;
+        z-index: -1;
+        background-size: 300% 300%;
+        animation: borderGradient 8s ease infinite;
+    }
+    
+    @keyframes borderGradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     
     .sentence-display {
-        background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #f8f4ff 25%, #fff8f0 50%, #f0fff4 75%, #fff0f5 100%);
         color: #2d3748;
-        padding: 2rem;
-        border-radius: 20px;
+        padding: 2.5rem;
+        border-radius: 25px;
         font-size: 1.3rem;
         font-family: 'Courier New', monospace;
         line-height: 1.6;
         text-align: center;
-        margin: 1.5rem 0;
-        border: 2px solid #b794f6;
-        box-shadow: 0 10px 30px rgba(183, 148, 246, 0.2);
+        margin: 2rem 0;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+        box-shadow: 0 15px 40px rgba(183, 148, 246, 0.2);
         transition: all 0.3s ease;
+    }
+    
+    .sentence-display::before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        background: linear-gradient(45deg, #ff9a9e, #4ecdc4, #a8e6cf, #ffd3a5, #dda0dd);
+        border-radius: 28px;
+        z-index: -1;
+        background-size: 300% 300%;
+        animation: borderGradient 6s ease infinite;
     }
     
     .sentence-display:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(183, 148, 246, 0.25);
+        transform: translateY(-5px);
+        box-shadow: 0 25px 60px rgba(183, 148, 246, 0.3);
     }
     
     .typing-input {
-        font-size: 1.2rem !important;
+        font-size: 1.3rem !important;
         font-family: 'Courier New', monospace !important;
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%) !important;
-        border-radius: 15px !important;
-        border: 2px solid #c3d9ff !important;
-        padding: 1.2rem !important;
-        box-shadow: 0 6px 20px rgba(195, 217, 255, 0.2) !important;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 50%, #fff5f8 100%) !important;
+        border-radius: 20px !important;
+        border: 3px solid transparent !important;
+        padding: 1.5rem !important;
+        box-shadow: 0 8px 30px rgba(195, 217, 255, 0.3) !important;
         transition: all 0.3s ease !important;
+        background-clip: padding-box !important;
     }
     
     .typing-input:focus {
-        border-color: #667eea !important;
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4) !important;
         outline: none !important;
+        transform: translateY(-3px) !important;
     }
     
     .metric-card {
-        background: linear-gradient(135deg, #e0f2ff 0%, #d6efff 100%);
-        padding: 1.5rem;
-        border-radius: 20px;
+        background: linear-gradient(135deg, #e0f2ff 0%, #d6efff 25%, #cce7ff 50%, #c3d9ff 75%, #bbd1ff 100%);
+        padding: 2rem;
+        border-radius: 25px;
         text-align: center;
         color: #2d5a87;
-        margin: 0.8rem;
-        box-shadow: 0 8px 25px rgba(173, 216, 255, 0.25);
-        border: 1px solid rgba(173, 216, 255, 0.3);
+        margin: 1rem;
+        box-shadow: 0 12px 35px rgba(173, 216, 255, 0.35);
+        border: 2px solid rgba(173, 216, 255, 0.5);
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+        transition: left 0.6s;
+    }
+    
+    .metric-card:hover::before {
+        left: 100%;
     }
     
     .metric-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(173, 216, 255, 0.35);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(173, 216, 255, 0.5);
+        border-color: rgba(102, 126, 234, 0.8);
     }
     
     .metric-card h3 {
         color: #4a90e2;
-        margin-bottom: 0.5rem;
-        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+        font-size: 1.3rem;
+        font-weight: 600;
     }
     
     .metric-card h2 {
         color: #2d5a87;
         margin: 0;
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         font-weight: 700;
     }
     
     .difficulty-badge {
         display: inline-block;
-        padding: 0.8rem 1.8rem;
-        border-radius: 30px;
+        padding: 1rem 2.5rem;
+        border-radius: 35px;
         font-weight: bold;
-        margin: 0.8rem;
+        margin: 1rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        letter-spacing: 1.5px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         transition: all 0.3s ease;
+        border: 3px solid rgba(255,255,255,0.4);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .difficulty-badge::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        transition: left 0.5s;
+    }
+    
+    .difficulty-badge:hover::before {
+        left: 100%;
     }
     
     .difficulty-badge:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     }
     
     .easy { 
-        background: linear-gradient(135deg, #a8e6cf 0%, #7fcdcd 100%);
+        background: linear-gradient(135deg, #a8e6cf 0%, #7fcdcd 33%, #88d8a3 66%, #98fb98 100%);
         color: #2d5a3d;
+        box-shadow: 0 8px 25px rgba(168, 230, 207, 0.5);
     }
     .medium { 
-        background: linear-gradient(135deg, #ffd3a5 0%, #fd9853 100%);
+        background: linear-gradient(135deg, #ffd3a5 0%, #fd9853 33%, #ffb347 66%, #ffa500 100%);
         color: #8b4513;
+        box-shadow: 0 8px 25px rgba(255, 211, 165, 0.5);
     }
     .hard { 
-        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 33%, #fbb6ce 66%, #ff69b4 100%);
         color: #8b2635;
+        box-shadow: 0 8px 25px rgba(255, 154, 158, 0.5);
     }
     
-    /* Streamlit component styling */
+    /* Enhanced Streamlit component styling */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #ff6b9d 75%, #4ecdc4 100%);
         color: white;
         border: none;
-        border-radius: 15px;
-        padding: 0.8rem 2.5rem;
-        font-weight: 600;
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        border-radius: 25px;
+        padding: 1rem 3rem;
+        font-weight: 700;
+        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
         transition: all 0.3s ease;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background-size: 200% 200%;
+        animation: buttonGradient 4s ease infinite;
+    }
+    
+    @keyframes buttonGradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     
     .stButton > button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        transform: translateY(-5px) scale(1.08);
+        box-shadow: 0 15px 45px rgba(102, 126, 234, 0.6);
     }
     
     .stProgress > div > div > div {
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        border-radius: 10px;
-        height: 8px;
+        background: linear-gradient(90deg, #ff6b9d 0%, #4ecdc4 20%, #96ceb4 40%, #ffeaa7 60%, #dda0dd 80%, #87ceeb 100%);
+        border-radius: 20px;
+        height: 15px;
+        background-size: 300% 300%;
+        animation: progressGradient 3s ease infinite;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    @keyframes progressGradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     
     .stSelectbox > div > div > div {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-        border: 2px solid #c3d9ff;
-        border-radius: 12px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 50%, #fff0f5 100%);
+        border: 3px solid rgba(183, 148, 246, 0.5);
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(183, 148, 246, 0.2);
+    }
+    
+    .stSelectbox > div > div > div:hover {
+        border-color: rgba(102, 126, 234, 0.8);
+        box-shadow: 0 8px 25px rgba(183, 148, 246, 0.3);
+        transform: translateY(-2px);
     }
     
     /* Custom animations */
@@ -188,6 +304,46 @@ st.markdown("""
     }
     
     @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    @keyframes glow {
+        0%, 100% { box-shadow: 0 12px 35px rgba(183, 148, 246, 0.3); }
+        50% { box-shadow: 0 20px 50px rgba(183, 148, 246, 0.6); }
+    }
+    
+    .floating {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    .pulse {
+        animation: pulse 2s ease-in-out infinite;
+    }
+    
+    .glow {
+        animation: glow 2s ease-in-out infinite;
+    }
+    
+    /* Additional enhancements */
+    .stInfo {
+        background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+        border-left: 5px solid #4ecdc4;
+        border-radius: 10px;
+    }
+    
+    .stSuccess {
+        background: linear-gradient(135deg, #e8f5e8 0%, #f0fff4 100%);
+        border-left: 5px solid #96ceb4;
+        border-radius: 10px;
+    }
+    
+    .stError {
+        background: linear-gradient(135deg, #fce4ec 0%, #fff0f5 100%);
+        border-left: 5px solid #ff9a9e;
+        border-radius: 10px;
+    }
+</style>""", unsafe_allow_html=True)
         0% { transform: scale(1); }
         50% { transform: scale(1.05); }
         100% { transform: scale(1); }
