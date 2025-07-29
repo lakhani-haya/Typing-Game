@@ -504,6 +504,17 @@ def main():
             # Store current input for reference
             st.session_state.current_input = typed_text
             
+            # Debug information (remove after testing)
+            if st.checkbox("Show Debug Info", value=False):
+                st.write(f"**Debug Info:**")
+                st.write(f"- Timer Active: {st.session_state.timer_active}")
+                st.write(f"- Start Time: {st.session_state.start_time}")
+                st.write(f"- Current Time: {time.time()}")
+                st.write(f"- Typed Text Length: {len(typed_text) if typed_text else 0}")
+                if st.session_state.timer_active and st.session_state.start_time > 0:
+                    elapsed = time.time() - st.session_state.start_time
+                    st.write(f"- Calculated Elapsed: {round(elapsed, 2)}s")
+            
             # Real-time feedback
             if typed_text:
                 progress = min(len(typed_text) / len(st.session_state.sentence), 1.0)
