@@ -3,7 +3,7 @@
 A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your typing speed and accuracy with animated feedback and adjustable difficulty levels.
 
 
-## 🚀 Features
+## Features
 
 - Three difficulty levels: Easy, Medium, Hard  
 - Real-time typing timer and word counter  
