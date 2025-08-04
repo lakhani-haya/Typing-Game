@@ -24,7 +24,7 @@ A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your 
 
 ---
 
-## Installation
+
 
 
 
