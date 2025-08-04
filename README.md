@@ -28,7 +28,6 @@ A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your 
 
 1. **Clone this repository**
    ```bash
-   git clone https://github.com/yourusername/typing-speed-game.git
-   cd 
+   git clone https://github.com/yourusername/typing-speed-game
 
 
