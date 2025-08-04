@@ -27,7 +27,6 @@ A fun and interactive **Typing Speed Game** built with **Streamlit**! Test your 
 ## Installation
 
 1. **Clone this repository**
-   ```bash
-   git clone 
+
 
 
