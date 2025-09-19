@@ -283,7 +283,7 @@ def calculate_performance_feedback(difficulty, wpm, accuracy):
             return "Challenging level! Keep pushing your limits!"
 
 def main():
-    # Header
+    # Heade
     st.markdown('<h1 class="main-header">TypeRacer Pro</h1>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">Test your typing speed with precision</p>', unsafe_allow_html=True)
     
