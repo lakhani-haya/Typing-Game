@@ -13,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Beautiful enhanced pastel theme CSS with more vibrant colors
+# Beautiful enhanced pastel theme CSS with mor vibrant colors
 st.markdown("""
 <style>
     .stApp {
