@@ -9,7 +9,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Beautif solid pastel theme CSS
+# Beautsolid pastel theme CSS
 st.markdown("""
 <style>
     .stApp {
