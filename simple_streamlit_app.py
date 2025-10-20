@@ -2,7 +2,7 @@ import streamlit as st
 import time
 import random
 
-# Page configuration
+# Page config
 st.set_page_config(
     page_title="TypeRacer Pro",
     page_icon="⌨️",
