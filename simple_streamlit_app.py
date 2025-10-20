@@ -9,7 +9,7 @@ st.set_page_config(
     layout="centered"
 )
 
-#  patheme CSS
+# theme CSS
 st.markdown("""
 <style>
     .stApp {
